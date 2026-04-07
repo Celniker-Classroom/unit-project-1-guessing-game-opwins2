@@ -17,11 +17,17 @@ document.getElementById("playBtn").addEventListener("click", function() {
             range = parseint(radios[i].value);
         }
     }
-answer = Math.floor(Math.random() * range) + 1;
+    //pick answer
+    answer = Math.floor(Math.random() * range) + 1;
+    //disable and enable button choices
+    document.getElementById("msg").textContent = playerName + ", guess a number between 1 and " + range;
+    document.getElementById("guess").value="";
+    document.getElementById("guessBtn").disabled = false;
+    document.getElementById("giveUpBtn").disabled = false;
+    document.getElementById("playBtn").disabled = true;
 
-document.getElementById("msg").textContent = playerName + ", guess a number between 1 and " + range;
-document.getElementById("guess").value="";
-document.getElementById("guessBtn").disabled = false
-document.getElementById("giveUpBtn").disabled = false
-document.getElementById("playBtn").disabled = true
+    let levelRadios = document.getElementsByName("level");
+    for (let i=0; i < radios.length; i++){
+       levelRadios[i].disabled = true
+    }
 });
