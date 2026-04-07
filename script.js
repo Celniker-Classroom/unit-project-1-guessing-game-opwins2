@@ -12,9 +12,9 @@ let playerName = prompt("Enter your name:");
 document.getElementById("playBtn").addEventListener("click", function() {
     let radios = document.getElementsByName("level");
     let range = 3;
-    for (let i=0; i < radios.length; i++){
-        if(radios[i].checked){
-            range = parseint(radios[i].value);
+    for (let i = 0; i < radios.length; i++){
+        if(radios[i].checked) {
+            range = parseInt(radios[i].value);
         }
     }
     //pick answer
@@ -30,4 +30,5 @@ document.getElementById("playBtn").addEventListener("click", function() {
     for (let i=0; i < radios.length; i++){
        levelRadios[i].disabled = true
     }
+
 });
