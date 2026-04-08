@@ -37,6 +37,7 @@ document.getElementById("playBtn").addEventListener("click", function() {
 document.getElementById("guessBtn").addEventListener("click", function() {
     let userGuess = document.getElementById("guess").value
     totalGuesses++
+    guessCount++
     if (userGuess > answer) {
         if (Math.abs(userGuess - answer) <= 2) {
             document.getElementById("msg").textContent = "Guess is hot but too high!";
@@ -67,6 +68,7 @@ document.getElementById("guessBtn").addEventListener("click", function() {
         document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
         document.getElementById("playBtn").disabled = false;
         document.getElementById("giveUpBtn").disabled = true;
+        scores = guessCount
     }
     else {
         document.getElementById("msg").textContent = "Invalid"
@@ -79,6 +81,7 @@ document.getElementById("giveUpBtn").addEventListener("click", function() {
    document.getElementById("giveUpBtn").disabled = true;
    totalWins++
    guessCount = range
+   scores = range
    totalGuesses = totalGuesses + guessCount
    document.getElementById("wins").textContent = "Total wins: " + totalWins;
    document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
