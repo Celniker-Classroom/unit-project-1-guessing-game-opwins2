@@ -32,3 +32,38 @@ document.getElementById("playBtn").addEventListener("click", function() {
     }
 
 });
+
+document.getElementById("guessBtn").addEventListener("click", function() {
+    let userGuess = document.getElementById("guess").value
+    if (userGuess > answer) {
+        if (Math.abs(userGuess - answer) <= 2) {
+            document.getElementById("msg").textContent = "Guess is hot but too high!";
+        }
+         else if (Math.abs(userGuess - answer) <= 5) {
+            document.getElementById("msg").textContent = "Guess is warm but too high!";
+        }
+        else {
+            document.getElementById("msg").textContent = "Guess is cold and too high";
+        }
+    }
+    else if (userGuess < answer) {
+         if (Math.abs(userGuess - answer) <= 2) {
+            document.getElementById("msg").textContent = "Guess is hot but too low!";
+        }
+         else if (Math.abs(userGuess - answer) <= 5) {
+            document.getElementById("msg").textContent = "Guess is warm but too low!";
+        }
+        else {
+            document.getElementById("msg").textContent = "Guess is cold and too low";
+        }
+    }
+    else if (userGuess == answer) {
+        document.getElementById("msg").textContent = "Guess is correct!";
+        document.getElementById("guessBtn").disabled = true;
+        guessCount++
+        document.getElementById
+    }
+    else {
+        document.getElementById("msg").textContent = "Invalid"
+    }
+});
