@@ -12,6 +12,7 @@ let truePlayerName = playerName.substring(0,1).toUpperCase() + playerName.substr
 // get level
 document.getElementById("playBtn").addEventListener("click", function() {
     let radios = document.getElementsByName("level");
+    guessCount = 0;
     range = 3;
     for (let i = 0; i < radios.length; i++){
         if(radios[i].checked) {
@@ -36,7 +37,6 @@ document.getElementById("playBtn").addEventListener("click", function() {
 
 document.getElementById("guessBtn").addEventListener("click", function() {
     let userGuess = document.getElementById("guess").value
-    totalGuesses++
     guessCount++
     if (userGuess > answer) {
         if (Math.abs(userGuess - answer) <= 2) {
@@ -63,12 +63,9 @@ document.getElementById("guessBtn").addEventListener("click", function() {
     else if (userGuess == answer) {
         document.getElementById("msg").textContent = "Guess is correct!";
         document.getElementById("guessBtn").disabled = true;
-        totalWins++
-        document.getElementById("wins").textContent = "Total wins: " + totalWins;
-        document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
         document.getElementById("playBtn").disabled = false;
         document.getElementById("giveUpBtn").disabled = true;
-        scores = guessCount
+        updateScore(guessCount);
     }
     else {
         document.getElementById("msg").textContent = "Invalid"
@@ -79,10 +76,26 @@ document.getElementById("giveUpBtn").addEventListener("click", function() {
    document.getElementById("guessBtn").disabled = true;
    document.getElementById("playBtn").disabled = false;
    document.getElementById("giveUpBtn").disabled = true;
-   totalWins++
-   guessCount = range
-   scores = range
-   totalGuesses = totalGuesses + guessCount
-   document.getElementById("wins").textContent = "Total wins: " + totalWins;
-   document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
+   guessCount = range;
+   updateScore(guessCount);
 });
+
+function updateScore(score) {
+    totalWins++;
+    totalGuesses += score;
+    document.getElementById("wins").textContent = "Total wins: " + totalWins;
+    document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses / totalWins).toFixed(1);
+
+    scores.push(score);
+    scores.sort(function(a, b) {return a - b;});
+
+    let leaderboard = document.getElementById("leaderboard");
+    for (let i = 0; i < leaderboard.length; i++) {
+        if (i < scores.length) {
+            leaderboard[i].textContent = scores[i];
+        } else {
+            leaderboard[i].textContent = "--";
+        }
+    }
+        
+} 
