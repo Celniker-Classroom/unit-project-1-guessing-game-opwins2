@@ -4,14 +4,15 @@ let guessCount = 0;
 let totalWins = 0;
 let totalGuesses = 0;
 let scores = 0;
+let range = 3;
 // Player name
 let playerName = prompt("Enter your name:");
-
+let truePlayerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1).toLowerCase();
 // Play
 // get level
 document.getElementById("playBtn").addEventListener("click", function() {
     let radios = document.getElementsByName("level");
-    let range = 3;
+    range = 3;
     for (let i = 0; i < radios.length; i++){
         if(radios[i].checked) {
             range = parseInt(radios[i].value);
@@ -20,7 +21,7 @@ document.getElementById("playBtn").addEventListener("click", function() {
     //pick answer
     answer = Math.floor(Math.random() * range) + 1;
     //disable and enable button choices
-    document.getElementById("msg").textContent = playerName + ", guess a number between 1 and " + range;
+    document.getElementById("msg").textContent = truePlayerName + ", guess a number between 1 and " + range;
     document.getElementById("guess").value="";
     document.getElementById("guessBtn").disabled = false;
     document.getElementById("giveUpBtn").disabled = false;
@@ -62,11 +63,23 @@ document.getElementById("guessBtn").addEventListener("click", function() {
         document.getElementById("msg").textContent = "Guess is correct!";
         document.getElementById("guessBtn").disabled = true;
         totalWins++
-        document.getElementById("wins").textContent = "Total wins: " + totalWins
-        document.getElementById("avgScore").textContent = "Average Score: " + totalGuesses/totalWins
+        document.getElementById("wins").textContent = "Total wins: " + totalWins;
+        document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
         document.getElementById("playBtn").disabled = false;
+        document.getElementById("giveUpBtn").disabled = true;
     }
     else {
         document.getElementById("msg").textContent = "Invalid"
     }
+});
+
+document.getElementById("giveUpBtn").addEventListener("click", function() {
+   document.getElementById("guessBtn").disabled = true;
+   document.getElementById("playBtn").disabled = false;
+   document.getElementById("giveUpBtn").disabled = true;
+   totalWins++
+   guessCount = range
+   totalGuesses = totalGuesses + guessCount
+   document.getElementById("wins").textContent = "Total wins: " + totalWins;
+   document.getElementById("avgScore").textContent = "Average Score: " + (totalGuesses/totalWins).toFixed(1);
 });
