@@ -8,6 +8,26 @@ let range = 3;
 // Player name
 let playerName = prompt("Enter your name:");
 let truePlayerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1).toLowerCase();
+let date = formatFormattedDate(new Date())
+function formatFormattedDate(date) {
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' }); 
+  const year = date.getFullYear();
+
+  
+  let suffix = 'th';
+  if (day === 1 || day === 21 || day === 31) {
+    suffix = 'st';
+  } else if (day === 2 || day === 22) {
+    suffix = 'nd';
+  } else if (day === 3 || day === 23) {
+    suffix = 'rd';
+  }
+
+
+  return `${month} ${day}${suffix}, ${year}`;
+}
+document.getElementById("date").textContent = "Welcome, " + truePlayerName + "! Today's date is " + date + ". Please select a difficulty level and click Play to start the game.";
 // Play
 // get level
 document.getElementById("playBtn").addEventListener("click", function() {
