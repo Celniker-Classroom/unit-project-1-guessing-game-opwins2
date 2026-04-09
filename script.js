@@ -3,7 +3,7 @@ let answer = 0;
 let guessCount = 0;
 let totalWins = 0;
 let totalGuesses = 0;
-let scores = 0;
+let scores = [];
 let range = 3;
 // Player name
 let playerName = prompt("Enter your name:");
@@ -89,7 +89,7 @@ function updateScore(score) {
     scores.push(score);
     scores.sort(function(a, b) {return a - b;});
 
-    let leaderboard = document.getElementById("leaderboard");
+    let leaderboard = document.getElementsByName("leaderboard");
     for (let i = 0; i < leaderboard.length; i++) {
         if (i < scores.length) {
             leaderboard[i].textContent = scores[i];
