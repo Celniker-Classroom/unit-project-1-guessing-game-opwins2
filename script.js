@@ -61,7 +61,7 @@ document.getElementById("guessBtn").addEventListener("click", function() {
         }
     }
     else if (userGuess == answer) {
-        document.getElementById("msg").textContent = "Guess is correct!";
+        document.getElementById("msg").textContent = truePlayerName + ", Guess is correct!";
         document.getElementById("guessBtn").disabled = true;
         document.getElementById("playBtn").disabled = false;
         document.getElementById("giveUpBtn").disabled = true;
