@@ -5,6 +5,10 @@ let totalWins = 0;
 let totalGuesses = 0;
 let scores = [];
 let range = 3;
+let roundStartTime = 0;
+let roundTimes = [];
+let fastestTime = Infinity;
+let totalTime = 0;
 // Player name
 let playerName = prompt("Enter your name:");
 let truePlayerName = playerName.substring(0,1).toUpperCase() + playerName.substring(1).toLowerCase();
@@ -42,6 +46,7 @@ document.getElementById("playBtn").addEventListener("click", function() {
     let radios = document.getElementsByName("level");
     guessCount = 0;
     range = 3;
+    roundStartTime = new Date().getTime();
     for (let i = 0; i < radios.length; i++){
         if(radios[i].checked) {
             range = parseInt(radios[i].value);
@@ -125,5 +130,20 @@ function updateScore(score) {
             leaderboard[i].textContent = "--";
         }
     }
+
+    // Calculate elapsed time
+    const elapsedTime = new Date().getTime() - roundStartTime;
+    roundTimes.push(elapsedTime);
+    totalTime += elapsedTime;
+    
+    // Update fastest time
+    if (elapsedTime < fastestTime) {
+        fastestTime = elapsedTime;
+    }
+    document.getElementById("fastest").textContent = "Fastest Game: " + (fastestTime / 1000).toFixed(1) + "s";
+    
+    // Update average time
+    const avgTime = totalTime / roundTimes.length;
+    document.getElementById("avgTime").textContent = "Average Time: " + (avgTime / 1000).toFixed(1) + "s";
         
 } 
