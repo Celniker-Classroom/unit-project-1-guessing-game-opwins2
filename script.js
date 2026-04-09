@@ -69,8 +69,20 @@ document.getElementById("playBtn").addEventListener("click", function() {
 });
 
 document.getElementById("guessBtn").addEventListener("click", function() {
-    let userGuess = document.getElementById("guess").value
-    guessCount++
+    let guessInput = document.getElementById("guess").value.trim();
+    let userGuess = parseInt(guessInput, 10);
+
+    if (guessInput === "" || isNaN(userGuess)) {
+        document.getElementById("msg").textContent = "Please enter a valid number.";
+        return;
+    }
+
+    if (userGuess < 1 || userGuess > range) {
+        document.getElementById("msg").textContent = "Guess must be between 1 and " + range + ".";
+        return;
+    }
+
+    guessCount++;
     if (userGuess > answer) {
         if (Math.abs(userGuess - answer) <= 2) {
             document.getElementById("msg").textContent = "Guess is hot but too high!";
@@ -101,7 +113,7 @@ document.getElementById("guessBtn").addEventListener("click", function() {
         updateScore(guessCount);
     }
     else {
-        document.getElementById("msg").textContent = "Invalid"
+        document.getElementById("msg").textContent = "Invalid";
     }
 });
 
